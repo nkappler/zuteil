@@ -3,12 +3,12 @@ export type Job<T> = (...args: any[]) => Promise<T>;
 export interface Config {
     /** if specified, any running job will fail after the specified timeout (in milliseconds). */
     timeout?: number;
-    /** if specified, any failed job will be retried up to X times before being rejected. */
+    /** if specified, any failed job will be retried up to X times before being rejected. Default `1`*/
     maxAttempts?: number;
     /** the maximum amount of jobs being run at once.
      * 
      * Default: `Infinity`. */
-    maxRunning?: number;
+    concurrentLimit?: number;
     /** whether newly added jobs should be run immediately if possible.
      * If set to false, you need to start execution by calling `start()`.
      * 
