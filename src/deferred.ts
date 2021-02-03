@@ -22,4 +22,4 @@ export function createDeferred<T>(): Deferred<T> {
     promise.resolve = (value: T | Promise<T>) => _resolve(value);
     promise.reject = (reason: any) => _reject(reason);
     return promise;
-};
+}

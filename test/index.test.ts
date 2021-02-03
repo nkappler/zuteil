@@ -1,16 +1,10 @@
 import { performance } from "perf_hooks";
 import { createDeferred } from "../src/deferred";
-import type { Config, Job, Status } from "../src/types";
-import { JobDispatcher } from "../src/zuteil";
+import { Config, JobDispatcher, Status } from "../src/zuteil";
 
 const spies = {
     statusListener: (status: Status) => status
 };
-
-const badSum = async (a: number, b: number) => new Promise<number>((resolve, reject) => {
-    setTimeout(() => resolve(a + b), Math.random() * 5000);
-    setTimeout(reject, 2500);
-});
 
 const setupDispatcherWithSpy = (config?: Config) => {
     spyOn(spies, "statusListener").and.callThrough();
@@ -18,13 +12,6 @@ const setupDispatcherWithSpy = (config?: Config) => {
     dispatcher.attachListener(spies.statusListener);
     return dispatcher;
 };
-
-const doHundredTimes = (job: Job<any>) =>
-    new Array(100)
-        .fill(null)
-        .map(async (_, i) =>
-            await job(i)
-        );
 
 describe("Global Dispatcher", () => {
     it("calling getInstance should create and return the same instance everytime.", () => {
