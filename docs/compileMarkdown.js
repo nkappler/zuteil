@@ -17,5 +17,6 @@ var hljs = require('highlight.js'),
 var source = fs.readFileSync("README.md").toString();
 var template = fs.readFileSync("./docs/template.html").toString();
 var result = template.replace("{{{CONTENT}}}", md.render(source));
+result = result.replace(/\/docs\//g, "/"); //fix for local img urls
 
 fs.writeFileSync("./docs/index.html", result);
