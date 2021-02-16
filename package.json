@@ -1,6 +1,6 @@
 {
   "name": "zuteil",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Asynchronous Job Dispatcher",
   "main": "dist/zuteil.js",
   "types": "dist/zuteil.d.ts",
