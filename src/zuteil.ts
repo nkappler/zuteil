@@ -171,7 +171,7 @@ export class JobDispatcher {
 
         let jobresult: PossibleFailure = null;
         let attempt = 1;
-        while (attempt === 1 || isUnsuccessful(jobresult) && attempt < this.config.maxAttempts) {
+        while (attempt === 1 || isUnsuccessful(jobresult) && attempt <= this.config.maxAttempts) {
             attempt++;
             const timeout = this.config.timeout >= 0
                 ? new Promise<FAILURE>(r => setTimeout(() => r(FAILURE.TIMEOUT), this.config.timeout))

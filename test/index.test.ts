@@ -167,19 +167,19 @@ describe("Test configuration options", () => {
     it("retry should work", async () => {
         const dispatcher = setupDispatcherWithSpy({ maxAttempts: 5, startImmediate: true });
 
-        let job1Attemps = 1;
+        let job1Attemps = 0;
         const job1 = dispatcher.addJob(async () => {
+            job1Attemps++;
             if (job1Attemps < 3) {
-                job1Attemps++;
                 throw new Error("fail");
             }
             return "success";
         });
 
-        let job2Attemps = 1;
+        let job2Attemps = 0;
         const job2 = dispatcher.addJob(async () => {
+            job2Attemps++;
             if (job2Attemps < 6) {
-                job2Attemps++;
                 throw new Error("fail");
             }
             return "success";
