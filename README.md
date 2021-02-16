@@ -24,7 +24,7 @@ Another limitation of zuteil is that aborted jobs still run in the background, t
 
 Run the following command in your projects root folder:
 ```sh
-$> npm install --save zuteil
+> npm install --save zuteil
 ```
 
 ## Usage
