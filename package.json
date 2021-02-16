@@ -9,6 +9,7 @@
     "updateDocs": "git checkout docs && git merge main && npm i && npm t && npm run compileMarkdown && git commit -a -m \"autogenerate docs\" && git push && git checkout main",
     "postversion": "npm run updateDocs && npm publish",
     "prepublishOnly": "npm run lint && npm t && npm run build",
+    "postpublish": "git push",
     "build": "tsc && npm run buildDeclaration",
     "buildDeclaration": "tsc --project tsconfig.types.json",
     "test": "jest",
