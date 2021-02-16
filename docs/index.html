@@ -39,7 +39,7 @@
 
 <body>
     <div class="markdown-body">
-        <p><img src="https://img.shields.io/badge/coverage-100%25-brightgreen" alt="./lcov-report/index.html"></p>
+        <p><a href="https://nkappler.de/zuteil/lcov-report/index.html"><img src="https://img.shields.io/badge/coverage-100%25-brightgreen" alt="https://nkappler.de/zuteil/lcov-report/index.html"></a></p>
 <h1>zuteil</h1>
 <p>A highly configurable dispatcher for async jobs, written in TypeScript</p>
 <h2>What zuteil is:</h2>
@@ -53,7 +53,7 @@
 <li>Keeping track of progress for a large amount of jobs.</li>
 </ul>
 <h2>What zuteil is <strong>not</strong>:</h2>
-<p>zuteil is not a multithreading solution. Although you can run as many jobs as you want concurrently, they all are run by the main thread, possibly blocking UI updates. You certainly can implement jobs, that are executed in a worker, making this multithreaded, but zuteil does not offer this functionality by itself.<br>
+<p>zuteil is not a multithreading solution. Although you can run as many jobs as you want concurrently, they are all run by the main thread, possibly blocking UI updates. You certainly can implement jobs, that are executed in a worker, making this multithreaded, but zuteil does not offer this functionality by itself.<br>
 Another limitation of zuteil is that aborted jobs still run in the background, their result is just ignored. Keep this in mind when your jobs have side effects.</p>
 <h2>Usage</h2>
 <p>Let's look at some examples to see what we can do with zuteil.<br>
@@ -71,9 +71,9 @@ I'll use Promises, async/await and arrow functions a lot. If you have never work
 });
 </code></pre>
 <p>This function calculates the sum of two numbers given to it, <code>a</code> and <code>b</code>, but is quite terrible at doing so. Not only does it take up to 10 seconds, until the result is calculated (the first <code>setTimeout</code>), it will also fail after 5 seconds (the second <code>setTimeout</code>).
-So effectively, it should take up to five seconds until the function either returns a result or fails, with a probability of 50% for either case. It is an awful function, but four our demonstration purposes it will do great.</p>
+So effectively, it should take up to five seconds until the function either returns a result or fails, with a probability of 50% for either case. It is an awful function, but for our demonstration purposes it will do great.</p>
 <p>Let's see how our assumptions hold by running it 100 times in parrallel. We will calculate the double of 1, 2, 3, ... 99, 100:</p>
-<p><img src="./gif/1.gif" alt=""></p>
+<p><img src="https://nkappler.de/zuteil/gif/1.gif" alt=""></p>
 <hr>
 <p>Great, so the <code>badSum</code> function works as expected. What I didn't tell you, is that I already used zuteil in the above example, to easily set up the execution and get the status readouts:</p>
 <pre class="hljs"><code><span class="hljs-keyword">import</span> {  JobDispatcher, Status } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zuteil&quot;</span>;
@@ -126,11 +126,11 @@ The Status object passed to each listener looks like this:</p>
 <h2>Configuring the dispatcher</h2>
 <p>We can configure the dispatcher in many ways, to influence the result. These are all the options you can pass to the dispatcher constructor, which are all optional:</p>
 <pre class="hljs"><code><span class="hljs-keyword">interface</span> Config {
-    timeout?: <span class="hljs-built_in">number</span>;
-    maxAttempts?: <span class="hljs-built_in">number</span>;
-    concurrentLimit?: <span class="hljs-built_in">number</span>;
-    startImmediate?: <span class="hljs-built_in">boolean</span>;
-    stopWhenDone?: <span class="hljs-built_in">boolean</span>;
+    timeout?: <span class="hljs-built_in">number</span>
+    maxAttempts?: <span class="hljs-built_in">number</span>
+    concurrentLimit?: <span class="hljs-built_in">number</span>
+    startImmediate?: <span class="hljs-built_in">boolean</span>
+    stopWhenDone?: <span class="hljs-built_in">boolean</span>
 }
 </code></pre>
 <h3><code>timeout</code></h3>
@@ -139,7 +139,7 @@ By specifying a timeout in milliseconds, the job will be aborted when the time r
 We can use this to make our example finish faster, at the expense of getting less results. When we set the timeout to 2500ms, our test should finish twice as fast, but with roughly half the results:</p>
 <pre class="hljs"><code><span class="hljs-keyword">const</span> dispatcher = <span class="hljs-keyword">new</span> JobDispatcher({ <span class="hljs-attr">timeout</span>: <span class="hljs-number">2500</span> });
 </code></pre>
-<p><img src="./gif/2.gif" alt=""></p>
+<p><img src="https://nkappler.de/zuteil/gif/2.gif" alt=""></p>
 <p>Notice, how we now have 0 failed jobs, since the jobs not finishing in time were aborted by the dispatcher and thus count towards &quot;Timed out&quot;.</p>
 <h3><code>maxAttempts</code></h3>
 <p>We can also make the calculations more likely to succeed, if we tell the dispatcher to retry failed or timed out jobs. You could even retry them indefinitely (<code>{ maxAttempts: Infinity }</code>) until they succeed, this could, however, take a very long time.<br>
@@ -149,7 +149,7 @@ Let's set <code>maxAttempts</code> to four. This means that the dispatcher retri
     <span class="hljs-attr">maxAttempts</span>: <span class="hljs-number">4</span>
 });
 </code></pre>
-<p><img src="./gif/3.gif" alt=""></p>
+<p><img src="https://nkappler.de/zuteil/gif/3.gif" alt=""></p>
 <h3><code>concurrentLimit</code></h3>
 <p>This option specifies the maximum number of jobs running at once. Per default, there is no limit.<br>
 To demonstrate this, let's run 10 jobs in sequence by setting the limit to one. All jobs take half a second which should give a total of five seconds.</p>
@@ -161,10 +161,10 @@ To demonstrate this, let's run 10 jobs in sequence by setting the limit to one. 
 
 dispatcher.start();
 </code></pre>
-<p><img src="./gif/4.gif" alt=""></p>
+<p><img src="https://nkappler.de/zuteil/gif/4.gif" alt=""></p>
 <p>Notice how there is now only 1 Running job at any time and the other jobs are pending. if we now increase the concurrentLimit to two, it should be twice as fast. If we run 5 jobs at the same time, all jobs should be finished after just a second:</p>
-<p><img src="./gif/5.gif" alt=""></p>
-<p><img src="./gif/6.gif" alt=""></p>
+<p><img src="https://nkappler.de/zuteil/gif/5.gif" alt=""></p>
+<p><img src="https://nkappler.de/zuteil/gif/6.gif" alt=""></p>
 <h3><code>startImmediate</code></h3>
 <p>If this option is set to true, the dispatcher will immediately execute newly added jobs, provided it is not circumvented by the <code>concurrentLimit</code>.</p>
 <pre class="hljs"><code><span class="hljs-comment">// This:</span>
@@ -178,7 +178,7 @@ dispatcher.start();
 <h2>How to handle jobs</h2>
 <p>What we haven't talked about so far, is how I referenced the results of the sum calculations in the first examples. The Status Listeners are great if you just want to know what's going on, but they won't be helpful if you care about the result of a job:</p>
 <h3><code>addJob</code></h3>
-<p>The <code>addJob</code> function takes any asynchronous function - a job - as its first argument. Calling <code>addJob</code> will return a Promise, which will resolve once the job is done. As mentioned before, the dispatcher handles errors for us, so it is not necessary for <code>try catch</code> or <code>promise.catch()</code>. If a job is unsuccessful, be it due to an error or timeout, the promise returned by <code>addJob</code> will resolve with <code>null</code>.</p>
+<p>The <code>addJob</code> function takes any asynchronous function - a job - as its first argument. Calling <code>addJob</code> will return a Promise, which will resolve once the job is done. As mentioned before, the dispatcher handles errors for us, so it is not necessary to use <code>try catch</code> or <code>promise.catch()</code>. If a job is unsuccessful, be it due to an error or timeout, the Promise returned by <code>addJob</code> will resolve with <code>null</code>.</p>
 <pre class="hljs"><code><span class="hljs-comment">// this job will be executed at some time,</span>
 <span class="hljs-comment">// when the dispatcher has capacity. No need to catch!</span>
 <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> dispatcher.add(<span class="hljs-keyword">async</span> () =&gt; <span class="hljs-number">42</span>);
@@ -198,7 +198,7 @@ dispatcher.start();
 <p>If you pass <code>true</code> as second argument, the job is to be executed immediatly, i.e. it is added first in the queue of pending jobs. If the dispatcher has no capacity at the moment, the job will be the next one to be executed.</p>
 <h4><code>ignoreJobLimit</code></h4>
 <p>If you additionally pass <code>true</code> as third argument, the <code>concurrentLimit</code> is ignored for just this job, meaning it is definitely executed immediately, but the job limit might be exceeded.</p>
-<p><em>This option only has an effect, if you also pass <code>true</code> for the <code>immediate</code> argument.`</em></p>
+<p><em>This flag only has an effect, if you also pass <code>true</code> for the <code>immediate</code> argument.</em></p>
 <p><em>Both the <code>immediate</code> and <code>ignoreJobLimit</code> flag only take effect, if the job execution is not halted.</em></p>
 <h2>Starting and stopping job execution</h2>
 <h3><code>start</code></h3>
