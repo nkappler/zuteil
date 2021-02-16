@@ -1,3 +1,5 @@
+/*! zuteil | (c) Nikolaj Kappler | https://github.com/nkappler/zuteil/blob/main/LICENSE !*/
+
 import { createDeferred, Deferred } from "./deferred";
 
 export type Job<T> = (...args: any[]) => Promise<T>;

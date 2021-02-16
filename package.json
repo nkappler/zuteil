@@ -2,13 +2,15 @@
   "name": "zuteil",
   "version": "0.0.0",
   "description": "Asynchronous Job Dispatcher",
-  "main": "index.js",
+  "main": "dist/zuteil.js",
+  "types": "dist/zuteil.d.ts",
   "scripts": {
     "compileMarkdown": "node docs/compileMarkdown.js",
     "updateDocs": "git checkout docs && git merge main && npm i && npm t && npm run compileMarkdown && git commit -a -m \"autogenerate docs\" && git push && git checkout main",
     "postversion": "npm run updateDocs && npm publish",
-    "build": "tsc && browserify out/zuteil.js > index.js && npm run buildDeclaration",
-    "buildDeclaration": "tsc -m amd --outFile index.js -d --emitDeclarationOnly --removeComments false",
+    "prepublishOnly": "npm run lint && npm t && npm run build",
+    "build": "tsc && npm run buildDeclaration",
+    "buildDeclaration": "tsc --project tsconfig.types.json",
     "test": "jest",
     "lint": "tslint --config tslint.json --project tsconfig.json"
   },
@@ -25,7 +27,6 @@
     "@types/cli-progress": "^3.8.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
-    "browserify": "^17.0.0",
     "highlight.js": "^10.6.0",
     "jest": "^26.6.3",
     "markdown-it": "^12.0.4",
@@ -34,7 +35,8 @@
     "typescript": "^4.1.3"
   },
   "files": [
-    "index.js",
-    "index.d.ts"
+    "dist/zuteil.d.ts",
+    "dist/zuteil.js",
+    "dist/deferred.js"
   ]
 }
