@@ -20,6 +20,13 @@ Possible use cases could include:
 zuteil is not a multithreading solution. Although you can run as many jobs as you want concurrently, they are all run by the main thread, possibly blocking UI updates. You certainly can implement jobs, that are executed in a worker, making this multithreaded, but zuteil does not offer this functionality by itself.  
 Another limitation of zuteil is that aborted jobs still run in the background, their result is just ignored. Keep this in mind when your jobs have side effects.
 
+## Install
+
+Run the following command in your projects root folder:
+```sh
+$> npm install --save zuteil
+```
+
 ## Usage
 
 Let's look at some examples to see what we can do with zuteil.  
@@ -233,3 +240,17 @@ Call `dispatcher.stop()` to pause or stop execution of jobs.
 Currently running jobs will be executed until they finish, fail or timeout.
 To abort any running jobs, call `dispatcher.stop(true)`. This will re-insert the jobs in the front of the pending queue, meaning they get exuted before other pending jobs, once execution is resumed.  
 *Note though, that aborted jobs are still running in the background, their result is just discarded. Keep this in mind when your jobs have side effects.*
+
+## Using a global dispatcher
+
+You can use the static method `getInstance` to obtain a global instance of the dispatcher, instead of calling the constructor `new JobDispatcher()`.
+When calling the function for the first time, you can pass the same config options as for the constructor.  
+*Passing config options to subsequent calls will have no effect*
+
+```typescript
+import { JobDispatcher } from "zuteil";
+
+const dispatcher = JobDispatcher.getInstance({
+    // configuration
+});
+```
