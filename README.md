@@ -110,11 +110,11 @@ We can configure the dispatcher in many ways, to influence the result. These are
 
 ```typescript
 interface Config {
-    timeout?: number;
-    maxAttempts?: number;
-    concurrentLimit?: number;
-    startImmediate?: boolean;
-    stopWhenDone?: boolean;
+    timeout?: number
+    maxAttempts?: number
+    concurrentLimit?: number
+    startImmediate?: boolean
+    stopWhenDone?: boolean
 }
 ```
 
