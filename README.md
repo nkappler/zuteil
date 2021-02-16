@@ -1,11 +1,13 @@
 [![https://nkappler.de/zuteil/lcov-report/index.html](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://nkappler.de/zuteil/lcov-report/index.html)
+[![npm](https://img.shields.io/npm/v/zuteil.svg)](https://www.npmjs.com/package/zuteil)
+![npm](https://img.shields.io/npm/types/zuteil.svg)
 # zuteil
 
 A highly configurable dispatcher for async jobs, written in TypeScript
 
 ## What zuteil is:
 
-zuteil can be used to control how a number of Jobs get executed. A Job is a function that returns a Promise. You might also call it an Action, a Callback or just an Async Function. I'll use Job since it is concise. You can configure zuteil to only execute a number of jobs at once, starting new ones as others finish, or to retry failed jobs a number of times, or to cancel long running jobs after a given timeout. Execution can be stopped and started at any time and any number of Status Listeners can be attached to be notified when a job is added, started, finishes, gets aborted or fails.
+zuteil can be used to control how a number of Jobs get executed. A Job is a function that returns a Promise. You might also call it an Action, a Task, a Callback or just an Async Function. I'll use Job since it is concise. You can configure zuteil to only execute a number of jobs at once, starting new ones as others finish, or to retry failed jobs a number of times, or to cancel long running jobs after a given timeout. Execution can be stopped and started at any time and any number of Status Listeners can be attached to be notified when a job is added, started, finishes, gets aborted or fails.
 
 Possible use cases could include:
 
