@@ -55,6 +55,10 @@
 <h2>What zuteil is <strong>not</strong>:</h2>
 <p>zuteil is not a multithreading solution. Although you can run as many jobs as you want concurrently, they are all run by the main thread, possibly blocking UI updates. You certainly can implement jobs, that are executed in a worker, making this multithreaded, but zuteil does not offer this functionality by itself.<br>
 Another limitation of zuteil is that aborted jobs still run in the background, their result is just ignored. Keep this in mind when your jobs have side effects.</p>
+<h2>Install</h2>
+<p>Run the following command in your projects root folder:</p>
+<pre class="hljs"><code>{{{CONTENT}}}gt; npm install --save zuteil
+</code></pre>
 <h2>Usage</h2>
 <p>Let's look at some examples to see what we can do with zuteil.<br>
 I'll use Promises, async/await and arrow functions a lot. If you have never worked with promises or need a refresher on how these things work, I recommend these excellent articles from Nicolás Bevaqua over at ponyfoo.com:</p>
@@ -208,6 +212,16 @@ dispatcher.start();
 Currently running jobs will be executed until they finish, fail or timeout.
 To abort any running jobs, call <code>dispatcher.stop(true)</code>. This will re-insert the jobs in the front of the pending queue, meaning they get exuted before other pending jobs, once execution is resumed.<br>
 <em>Note though, that aborted jobs are still running in the background, their result is just discarded. Keep this in mind when your jobs have side effects.</em></p>
+<h2>Using a global dispatcher</h2>
+<p>You can use the static method <code>getInstance</code> to obtain a global instance of the dispatcher, instead of calling the constructor <code>new JobDispatcher()</code>.
+When calling the function for the first time, you can pass the same config options as for the constructor.<br>
+<em>Passing config options to subsequent calls will have no effect</em></p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> { JobDispatcher } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zuteil&quot;</span>;
+
+<span class="hljs-keyword">const</span> dispatcher = JobDispatcher.getInstance({
+    <span class="hljs-comment">// configuration</span>
+});
+</code></pre>
 
     </div>
 </body>
