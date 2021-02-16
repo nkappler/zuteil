@@ -15,6 +15,13 @@
     "test": "jest",
     "lint": "tslint --config tslint.json --project tsconfig.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkappler/zuteil.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nkappler/zuteil/issues"
+  },
   "keywords": [
     "dispatcher",
     "scheduler",
