@@ -1,7 +1,7 @@
 {
   "name": "zuteil",
-  "version": "1.0.1",
-  "description": "Asynchronous Job Dispatcher",
+  "version": "1.0.2",
+  "description": "A highly configurable dispatcher for async jobs, written in TypeScript",
   "main": "dist/zuteil.js",
   "types": "dist/zuteil.d.ts",
   "scripts": {
@@ -27,7 +27,9 @@
     "scheduler",
     "async",
     "job",
-    "action"
+    "task",
+    "action",
+    "typescript"
   ],
   "author": "Nikolaj Kappler",
   "license": "ISC",
