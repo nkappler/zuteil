@@ -4,6 +4,9 @@
   "description": "Asynchronous Job Dispatcher",
   "main": "index.js",
   "scripts": {
+    "compileMarkdown": "node docs/compileMarkdown.js",
+    "updateDocs": "git checkout docs && git merge main && npm i && npm t && npm run compileMarkdown && git commit -a -m \"autogenerate docs\" && git push && git checkout main",
+    "postversion": "npm run updateDocs",
     "test": "jest",
     "lint": "tslint --config tslint.json --project tsconfig.json"
   },
@@ -11,7 +14,8 @@
     "dispatcher",
     "scheduler",
     "async",
-    "job"
+    "job",
+    "action"
   ],
   "author": "Nikolaj Kappler",
   "license": "ISC",
