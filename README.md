@@ -32,7 +32,7 @@ Run the following command in your projects root folder:
 ## Usage
 
 Let's look at some examples to see what we can do with zuteil.  
-I'll use Promises, async/await and arrow functions a lot. If you have never worked with promises or need a refresher on how these things work, I recommend these excellent articles from Nicolás Bevaqua over at ponyfoo.com:
+I am going to use Promises, async/await and arrow functions a lot. If you have never worked with these concepts or need a refresher on how they work, I recommend these excellent articles from Nicolás Bevaqua over at ponyfoo.com:
 
 - [ES6 Promises in Depth](https://ponyfoo.com/articles/es6-promises-in-depth)  
 - [Understanding JavaScript's async await](https://ponyfoo.com/articles/understanding-javascript-async-await)  
