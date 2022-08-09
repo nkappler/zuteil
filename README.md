@@ -1,4 +1,4 @@
-[![https://nkappler.de/zuteil/lcov-report/index.html](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://nkappler.de/zuteil/lcov-report/index.html)
+[![](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://nkappler.github.io/zuteil/lcov-report/index.html)
 [![npm](https://img.shields.io/npm/v/zuteil.svg)](https://www.npmjs.com/package/zuteil)
 ![npm](https://img.shields.io/npm/types/zuteil.svg)
 # zuteil
@@ -53,7 +53,7 @@ So effectively, it should take up to five seconds until the function either retu
 
 Let's see how our assumptions hold by running it 100 times in parrallel. We will calculate the double of 1, 2, 3, ... 99, 100:
 
-![](https://nkappler.de/zuteil/gif/1.gif)
+![](https://nkappler.github.io/zuteil/gif/1.gif)
 
 ---
 
@@ -137,7 +137,7 @@ We can use this to make our example finish faster, at the expense of getting les
 const dispatcher = new JobDispatcher({ timeout: 2500 });
 ```
 
-![](https://nkappler.de/zuteil/gif/2.gif)
+![](https://nkappler.github.io/zuteil/gif/2.gif)
 
 Notice, how we now have 0 failed jobs, since the jobs not finishing in time were aborted by the dispatcher and thus count towards "Timed out".
 
@@ -152,7 +152,7 @@ const dispatcher = new JobDispatcher({
 });
 ```
 
-![](https://nkappler.de/zuteil/gif/3.gif)
+![](https://nkappler.github.io/zuteil/gif/3.gif)
 
 ### `concurrentLimit`
 This option specifies the maximum number of jobs running at once. Per default, there is no limit.  
@@ -168,13 +168,13 @@ for (var i = 0; i < 10; i++) {
 dispatcher.start();
 ```
 
-![](https://nkappler.de/zuteil/gif/4.gif)
+![](https://nkappler.github.io/zuteil/gif/4.gif)
 
 Notice how there is now only 1 Running job at any time and the other jobs are pending. if we now increase the concurrentLimit to two, it should be twice as fast. If we run 5 jobs at the same time, all jobs should be finished after just a second:
 
-![](https://nkappler.de/zuteil/gif/5.gif)
+![](https://nkappler.github.io/zuteil/gif/5.gif)
 
-![](https://nkappler.de/zuteil/gif/6.gif)
+![](https://nkappler.github.io/zuteil/gif/6.gif)
 
 ### `startImmediate`
 
